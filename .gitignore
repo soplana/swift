@@ -1,0 +1,3 @@
+*.log
+*.swiftx
+run[0-9]*/
