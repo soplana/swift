@@ -41,6 +41,19 @@ func lessonFunction() {
   // 関数はオブジェクトなので代入することも可能
   var hoge = sayHello
   println(hoge("soplana", 29))
+
+  // 名前付き引数で関数を定義した場合
+  // 呼び出し元も名前付きが強要される
+  func sayHello2(#name: String, #age: Int) -> String {
+    return "\(name) hello! \(age)"
+  }
+  println(sayHello2(name: "soplana", age: 29)) // => sayHello2("soplana", 29)はerror
+
+  // デフォルト引数
+  func sayHello3(name: String, age: Int = 30) -> String {
+    return "\(name) hello! \(age)"
+  }
+  println(sayHello3("soplana"))
 }
 lessonFunction()
 
@@ -76,3 +89,51 @@ func lessonOptional(){
   println(inc(optionalInt!))
 }
 lessonOptional()
+
+
+
+// ****************************
+// tupleについて
+// ****************************
+func tupleOptional(){
+  lesson("tupleOptional")
+
+  // tupleを使うと別のオブジェクトをまとめて扱える
+  var tuple1 = (100, "hoge")
+  println(tuple1.0)
+  println(tuple1.1)
+
+  // 名前を付けられる
+  var tuple2 = (first: 200, second: "fuga", third: "piyo")
+  println(tuple2.first)
+  println(tuple2.second)
+  println(tuple2.third)
+
+  // 代入に使える
+  // 不必要な要素は_
+  var (first, _, third) = tuple2
+  println(first)
+  println(third)
+
+  // 単一のtupleには名前を付けられない
+  var tuple3 = (a: 1)
+  println(tuple3) // => 1が返る。tuple3.aはerror
+
+  // tupleを関数の引数に使う
+  // varで宣言したtupleは引数には使用できないっぽい
+  func humanInfo(name: String, age: Int) {
+    println("\(name) is a \(age) year old")
+  }
+  let tuple4 = ("soplana", 29)
+  humanInfo(tuple4)
+
+  // 名前付き引数で関数を定義した場合
+  // 引数に渡すtupleも名前付きで定義する必要がある
+  // tupleの順番や, 要素の数が違う場合error
+  func humanInfo2(#name: String, #age: Int) {
+    println("\(name) is a \(age) year old")
+  }
+  let tuple5 = (name: "soplana", age: 29)
+  humanInfo2(tuple5)
+}
+tupleOptional()
