@@ -54,6 +54,27 @@ func lessonFunction() {
     return "\(name) hello! \(age)"
   }
   println(sayHello3("soplana"))
+
+  // 可変の引数
+  func count(nums: Int...) {
+    for num in nums {
+      println(num)
+    }
+  }
+  count(1,2,3,4,5,6)
+
+  // 関数の引数に、関数を渡す
+  func evenOrOddNumberCount(numbers: [Int], condition: Int -> Bool){
+    for num in numbers {
+      if condition(num) {
+        println(num)
+      }
+    }
+  }
+  func evenNumber(number: Int) -> Bool {
+    return number%2 == 0
+  }
+  evenOrOddNumberCount([1,2,3,4,5,6], evenNumber)
 }
 lessonFunction()
 
