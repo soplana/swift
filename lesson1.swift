@@ -158,3 +158,39 @@ func tupleOptional(){
   humanInfo2(tuple5)
 }
 tupleOptional()
+
+
+
+// ****************************
+// クロージャについて
+// ****************************
+func closureOptional(){
+  lesson("closureOptional")
+
+  var numbers = [1,2,3,4,5,6]
+
+  // { (…) -> … in … return … } の形式
+  var _numbers1 = numbers.map({
+    (number: Int) -> Int in
+      let i = number * 100
+      return i
+  })
+  println(_numbers1)
+
+  // クロージャの引数の型が推論できるなら省略可能
+  println(numbers.map({ num in num*10 }))
+
+  // 関数の引数に、クロージャを渡す
+  func evenOrOddNumberCount(numbers: [Int], condition: Int -> Bool){
+    for num in numbers {
+      if condition(num) {
+        println(num)
+      }
+    }
+  }
+  evenOrOddNumberCount([1,2,3,4,5,6], {
+    (number: Int) -> Bool in
+      return number%2 == 0
+  })
+}
+closureOptional()
