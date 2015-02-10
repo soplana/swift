@@ -2,6 +2,33 @@ func lesson(no: String) {
   println("")
   println("********** \(no) *************")
 }
+
+
+
+// ****************************
+// 変数について
+// ****************************
+func variableFunction() {
+  lesson("variableFunction")
+
+  // varは変数の宣言で再代入可能
+  var hoge = "hoge"
+  println(hoge)
+  hoge = "fuga"
+  println(hoge)
+
+  // letは定数の宣言で再代入不可
+  let piyo = "piyo"
+  println(piyo)
+  // piyo = "piyopiyo" -> error
+
+  // 型宣言
+  var fuga: String
+}
+variableFunction()
+
+
+
 // ****************************
 // 関数について
 // ****************************
