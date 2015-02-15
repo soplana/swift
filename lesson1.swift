@@ -192,5 +192,19 @@ func closureOptional(){
     (number: Int) -> Bool in
       return number%2 == 0
   })
+
+  // 引数をとらないクロージャ
+  func sampleFunc(p: () -> Void){
+    p()
+  }
+  sampleFunc({ println("hogehoge") })
+
+  // 後置記法を使い()の省略が可能
+  sampleFunc { println("hogehoge") }
+
+  evenOrOddNumberCount([7,8,9,10,11,12]) {
+    (number: Int) -> Bool in
+      return number%2 == 0
+  }
 }
 closureOptional()
