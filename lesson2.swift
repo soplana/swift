@@ -157,3 +157,81 @@ func structFunction() {
   // SwiftのString, Array, Dictionaryは構造体を使って実装されている
 }
 structFunction()
+
+
+
+// ****************************
+// プロパティについて
+// ****************************
+lesson("propertyFunction")
+
+class Attack {
+  var monster: Monster
+
+  var str: Int {
+    get {
+      return monster.level * 10
+    }
+  }
+  var mag: Int {
+    get {
+      return monster.level * 20
+    }
+  }
+
+  init(monster: Monster) {
+    self.monster = monster
+  }
+
+  func description() -> String {
+    return "\(monster.description())\nSTR: \(self.str) MAG: \(self.mag)"
+  }
+}
+
+class Monster {
+  var name:  String
+
+  // propertyの監視
+  var level: Int {
+    // propertyが変更される前に実行される
+    // newValueで変更後の値を取得出来る(引数で名前を設定することも出来る)
+    // self.levelは変更前の値を指す
+    willSet {
+      println("テレレレッテッテッテー！")
+    }
+    // propertyが変更された後に実行される
+    // oldValueで変更後の値を取得出来る(引数で名前を設定することも出来る)
+    // self.levelは変更前の後を指す
+    didSet(beforeLevel) {
+      println("level Up : \(beforeLevel) -> \(self.level)")
+    }
+  }
+
+  // propertyの遅延評価
+  // 参照されるまでattackを評価しない
+  lazy var attack: Attack = {
+    // selfに対する循環参照を防ぐためにunownedで
+    // selfへの参照を持たないように宣言する
+    [unowned self] in
+    return Attack(monster: self)
+  }()
+
+  init(name: String, level: Int = 1){
+    self.name  = name
+    self.level = level
+  }
+
+  func description() -> String {
+    return "\(name) : Lv\(level)"
+  }
+
+  func levelUp() {
+    self.level += 1
+  }
+}
+var monster = Monster(name: "アトラス", level: 3)
+// ↑この時点では, attackはnil（なの？）
+
+println(monster.attack.description())
+monster.levelUp()
+println(monster.attack.description())
