@@ -123,3 +123,37 @@ func classFunction() {
   println(monsterC.description())
 }
 classFunction()
+
+
+
+// ****************************
+// 構造体について
+// ****************************
+func structFunction() {
+  lesson("structFunction")
+
+  struct Monster {
+    // メンバ変数を宣言した順番で
+    // メンバ変数を引数にもつinitializerが自動で生成される
+    var name:  String
+    var level: Int
+
+    func description() -> String {
+      return "\(name) : Lv\(level)"
+    }
+  }
+  var monster  = Monster(name: "タコメット", level: 39)
+  var monsterB = monster
+  println(monster.description())
+
+  // Structは参照渡しではないので
+  // メンバ変数を変更してもmonsterBの値は変わらない
+  // ちなみにletで宣言した構造体のプロパティには
+  // 変更を加えることは出来ない
+  monster.level = 40
+  println(monster.description())
+  println(monsterB.description())
+
+  // SwiftのString, Array, Dictionaryは構造体を使って実装されている
+}
+structFunction()
