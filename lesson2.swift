@@ -115,7 +115,11 @@ func classFunction() {
   monsterB.damage = 2090
   println(monsterB.description())
 
+  // インスタンスの代入は参照渡し
+  let monsterC = monsterB
+
   monsterB.damage = 3000
   println(monsterB.description())
+  println(monsterC.description())
 }
 classFunction()
