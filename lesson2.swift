@@ -165,7 +165,7 @@ structFunction()
 // ****************************
 lesson("propertyFunction")
 
-class Attack {
+struct Attack {
   var monster: Monster
 
   var str: Int {
@@ -179,10 +179,6 @@ class Attack {
     }
   }
 
-  init(monster: Monster) {
-    self.monster = monster
-  }
-
   func description() -> String {
     return "\(monster.description())\nSTR: \(self.str) MAG: \(self.mag)"
   }
@@ -190,6 +186,12 @@ class Attack {
 
 class Monster {
   var name:  String
+
+  // 読み取り専用のプロパティの宣言になるのかな？
+  // get {} を省略することが出来る
+  var dropItem: String {
+    return "\(self.name) : バトルチョーカー"
+  }
 
   // propertyの監視
   var level: Int {
@@ -235,3 +237,4 @@ var monster = Monster(name: "アトラス", level: 3)
 println(monster.attack.description())
 monster.levelUp()
 println(monster.attack.description())
+println(monster.dropItem)
