@@ -177,8 +177,11 @@ func closureOptional(){
   })
   println(_numbers1)
 
-  // クロージャの引数の型が推論できるなら省略可能
-  println(numbers.map({ num in num*10 }))
+  // 型推論を使って(number: Int) -> Intを省略
+  println(numbers.map({ num in num * 10 }))
+
+  // プレースホルダをつかって更に省略
+  println(numbers.map({ $0 * 10 }))
 
   // 関数の引数に、クロージャを渡す
   func evenOrOddNumberCount(numbers: [Int], condition: Int -> Bool){
