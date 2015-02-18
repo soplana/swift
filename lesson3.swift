@@ -108,5 +108,23 @@ func arrayFunction() {
 
   // reverse
   println(sortedArrayD.reverse()) // [9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+  // filter
+  println(sortedArrayD.filter({ $0%2 == 0 })) // [2, 4, 6, 8]
+
+  // map
+  println(sortedArrayD.map({ $0*10 })) // [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+  // reduce
+  println(sortedArrayD.reduce(0) {$0 + $1}) // 45
+  println(sortedArrayD.reduce(0, +))        // 45
+
+  // +=と+ Operators
+  var g = [1,2,3],
+      h = [4,5,6]
+  println(g + h) // [1, 2, 3, 4, 5, 6]
+  println(g)     // [1, 2, 3]
+  g += h
+  println(g)     // [1, 2, 3, 4, 5, 6]
 }
 arrayFunction()
