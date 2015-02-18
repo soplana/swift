@@ -156,6 +156,37 @@ func tupleOptional(){
   }
   let tuple5 = (name: "soplana", age: 29)
   humanInfo2(tuple5)
+
+  // ArrayやDictionaryと何が違うの？
+  //  > 型が違う値を纏めておける
+  //  > 繰り返し処理ができない
+  //  > 値の変更が出来ない
+
+  // Swiftにおいて、すべてはTuple
+  var a = "hoge"
+  println(a.0)       // hoge
+  println("hoge".0)  // hoge
+  println(true.0)    // true
+  println((0).0)     // 0
+  println((0).0.0.0) // 0  あたまおかしい...
+  println((1...3).0) // 1..<4
+  func f() -> (){}
+  println(f.0)       //  (Function)
+
+  class Hoge {
+    var hoge: String?
+    init(){}
+  }
+  var hoge = Hoge()
+  println(hoge.0) // lesson1.(tupleOptional () -> ()).(Hoge #1)
+                  // ↑ なにか分からないけど、tupleであることは確かっぽい
+
+  struct Fuga {
+    var fuga: String?
+    init(){}
+  }
+  var fuga = Fuga()
+  println(fuga.0) // lesson1.(tupleOptional () -> ()).(Fuga #1)
 }
 tupleOptional()
 
