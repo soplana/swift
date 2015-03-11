@@ -42,10 +42,16 @@ func arrayFunction() {
   // 同じ配列の中には入れることが出来ない
   var c = Array<Int>()
   var d = [Int]()
+  var dd: [Int] = [1,2]
 
   // 要素数と初期値を宣言したinit
   var e = Array(count: 3, repeatedValue: 1)
   println(e) // [1, 1, 1]
+
+  // Anyを指定したらなんでも入れられるっぽい
+  var any = [Any]()
+  any = [1, "2", 3, "4", [5]]
+  var any2: [Any] = [1,2,"3"]
 
   // append
   // letで宣言されている場合はappendできない
@@ -92,6 +98,17 @@ func arrayFunction() {
     return a < b
   }
   println(sortedArrayA) // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  // sortedはオブジェクトに破壊的変更を加えない
+  println(beforeSort)   // [1,5,3,9,7,4,2,6,8]
+  var beforeSort2 = [3,2,1]
+  beforeSort2.sort(<)
+  // sortはオブジェクトに破壊的変更を加える
+  println(beforeSort2)   // [1,2,3]
+
+  // sort/sorted関数を使ってもよい
+  // &が何か分からないけど、beforeSortの値が破壊的に変更されてないので
+  // rubyのdup的な動作をしてくれるシンタックスか？
+  println( sort(&beforeSort) )
 
   // 型推論を使った省略形
   var sortedArrayB = beforeSort.sorted {a,b in a<b}
