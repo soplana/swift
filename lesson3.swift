@@ -145,3 +145,58 @@ func arrayFunction() {
   println(g)     // [1, 2, 3, 4, 5, 6]
 }
 arrayFunction()
+
+
+
+// ****************************
+// Dictionaryについて
+// ****************************
+func dictionaryFunction() {
+  lesson("dictionaryFunction")
+
+  // Arrayに似てる
+  var dic = [String: Int]()
+  println(dic)
+  dic["hoge"] = 1
+  println(dic["hoge"]) // Optional(1) なんでもoptionalやな
+
+  var dic1 = ["hoge": 1, "fuga": 2]
+  println(dic1)
+  println(dic1["hoge"])  // Optional(1)
+  println(dic1["hoge"]!) // 1
+
+  // nilを代入するとkeyごと消える。nilを値に持つことは出来ないみたい
+  dic1["fuga"] = nil
+  println(dic1) // [hoge: 1]
+
+
+  var dic2 = ["a": 1, "b": 2, "c": 3]
+  var oldvalue1 = dic2.updateValue(44, forKey: "a")
+  println(dic2) // [b: 2, a: 44, c: 3]
+  println(oldvalue1!) // 1
+
+
+  var oldvalue2 = dic2.removeValueForKey("a")
+  println(dic2) // [b: 2, c: 3]
+  println(oldvalue2!) // 44
+
+
+  var oldvalue3: Any = dic2.removeAll()
+  println(dic2) // [b: 2, c: 3]
+  println(oldvalue3) // () なんやこれ
+
+
+  var dic3 = ["a": 1, "b": 2, "c": 3]
+  println(dic3.count)         // 3
+  println(Array(dic3.keys))   //  [b, a, c]
+  println(Array(dic3.values)) //  [2, 1, 3]
+
+  // ==演算子はオブジェクトIDの比較ではなく、値の比較っぽい
+  var dic4 = ["a": 1, "b": 2, "c": 3]
+  println( dic3 == dic4 ) // true
+  println( dic3 != dic4 ) // false
+
+  println( dic2 == dic4 ) // false
+  println( dic2 != dic4 ) // true
+}
+dictionaryFunction()
