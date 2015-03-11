@@ -66,18 +66,64 @@ func classFunction() {
 
   // *************** 継承 ***************
   class Zombie : MonsterA {
-    var type: String = "ゾンビ系"
-
     // overrideする場合はプレフィックスが必要
     // ないとerrorになる
     override func description() -> String {
-      return "\(super.description()) (\(self.type))"
+      return "\(super.description()) (ゾンビ系)"
     }
   }
   let zombie = Zombie(name: "くさった死体", level: 10)
   println(zombie.description())
   zombie.levelUp()
   println(zombie.description())
+
+  // 型チェック
+  println("型チェック")
+
+  let monsters: [Any] = [
+    Zombie(name: "くさった死体", level: 10)
+  ]
+
+  for m in monsters {
+    // is演算子でチェックする
+    // 検査する対象の型が明確な場合はコンパル時にエラーになる
+    if m is MonsterA {
+      println("zombieはMonsterAのサブクラスだ！")
+    } else {
+      println("zombieはMonsterAのサブクラスではない！")
+    }
+  }
+
+  // キャスト
+  println("キャスト")
+
+  class Machine : MonsterA {
+    // overrideする場合はプレフィックスが必要
+    // ないとerrorになる
+    override func description() -> String {
+      return "\(super.description()) (マシン系)"
+    }
+  }
+
+  // MonsterAで宣言した段階で、アップキャストされている
+  let monsters2: [MonsterA] = [
+    Zombie(name: "くさった死体",    level: 10),
+    Zombie(name: "グール",          level: 60),
+    Machine(name: "キラーマシーン", level: 40)
+  ]
+
+  for m in monsters2 {
+    // as/as?によってダウンキャストを行う
+    // キャスト可能かどうか分からない時にas?を使う
+    // m as? Machineがisを含んでいて真偽値を返しているらしい
+    if let _m = m as? Machine {
+      println("\(m.name)はマシン系")
+    } else if let _z = m as? Zombie {
+      println("\(m.name)はゾンビ系")
+    }
+  }
+
+
 
 
   // *************** getter setter ***************
