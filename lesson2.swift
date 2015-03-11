@@ -124,8 +124,6 @@ func classFunction() {
   }
 
 
-
-
   // *************** getter setter ***************
   class MonsterB : MonsterA {
     var currentDamage: Int = 0
@@ -203,6 +201,49 @@ func structFunction() {
   // SwiftのString, Array, Dictionaryは構造体を使って実装されている
 }
 structFunction()
+
+
+
+// ****************************
+// protocolについて
+// ****************************
+// interfaceみたいなやつ
+protocol Exp {
+  var exp: Int { get }
+  func showExp()    -> String
+  func getExp(val: Int)
+}
+
+protocol Status {
+  var level: Int { get }
+}
+
+
+class MonsterC : Exp, Status {
+  var name:  String
+  var level: Int
+  var exp:   Int
+
+  init(name: String, level: Int, exp: Int){
+    self.name  = name
+    self.level = level
+    self.exp   = exp
+  }
+
+  func showExp() -> String{
+    return "Exp: \(self.exp) / \(self.level * 1000)"
+  }
+
+  func getExp(val: Int) {
+    self.exp += val
+  }
+}
+
+var mons = MonsterC(name: "バラモス", level: 10, exp: 0)
+mons.getExp(1000)
+mons.getExp(2000)
+println(mons.showExp())
+
 
 
 
